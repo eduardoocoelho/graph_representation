@@ -2,6 +2,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Graph Representation
+ * 
+ * @author Eduardo O. Coelho
+ */
+
 public class Main{
     
     public static void buildMatrix(Scanner sc, int[][] matrix){
@@ -138,49 +144,35 @@ public class Main{
 
         //printing the results
         System.out.println("Lista de predecessores do vértice (" + vertex + ") - " + predecessors.toString());
+        System.out.println();
     }
-
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
 
         //ask which file is going to be used
-        System.out.println("Selecione o arquivo:");
-        System.out.println("1 - 'graph-test-100.txt'");
-        System.out.println("2 - 'graph-test-50000.txt'");
-        int option = sc.nextInt();
+        System.out.println("Qual o nome do arquivo que será utilizado?");
+        String file = sc.nextLine();
         System.out.println();
 
         sc.close();
 
         //select the correct file
-        if(option == 1){
-            sc = new Scanner(new File("graph-test-100.txt"));
+        sc = new Scanner(new File(file));
 
-            //initialize the matrix
-            int totalVertex = sc.nextInt() + 1;
-            int totalEdges = sc.nextInt() + 1;
-            int[][] matrix = new int[totalVertex][totalEdges];
+        //initialize the matrix
+        int totalVertex = sc.nextInt() + 1;
+        int totalEdges = sc.nextInt() + 1;
+        int[][] matrix = new int[totalVertex][totalEdges];
 
-            buildMatrix(sc, matrix);
+        buildMatrix(sc, matrix);
 
-            int maxOutDegreeVertex = maxOutDegree(totalVertex, totalEdges, matrix);
-            successors(maxOutDegreeVertex, totalVertex, totalEdges, matrix);
-            System.out.println("============================================================================================================================");
-            int maxInDegreeVertex = maxInDegree(totalVertex, totalEdges, matrix);
-            predecessors(maxInDegreeVertex, totalVertex, totalEdges, matrix);
+        int maxOutDegreeVertex = maxOutDegree(totalVertex, totalEdges, matrix);
+        successors(maxOutDegreeVertex, totalVertex, totalEdges, matrix);
+        System.out.println("============================================================================================================================");
+        int maxInDegreeVertex = maxInDegree(totalVertex, totalEdges, matrix);
+        predecessors(maxInDegreeVertex, totalVertex, totalEdges, matrix);
 
-            sc.close();
-        } else{
-            sc = new Scanner(new File("graph-test-50000.txt"));
-
-                //initialize the matrix
-                int totalVertex = sc.nextInt() + 1;
-                int totalEdges = sc.nextInt() + 1;
-                int[][] matrix = new int[totalVertex][totalEdges];
-
-                buildMatrix(sc, matrix);
-
-                sc.close();
-        } 
+        sc.close();
+        
     }
 }
